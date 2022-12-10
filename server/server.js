@@ -7,8 +7,8 @@ const server = require("websocket").server
 const app = express();
 
 const socket = new server({
-  httpServer: app.listen(1337, () => {
-    console.log("server is running on port 1337");
+  httpServer: app.listen(process.env.PORT || 1337, () => {
+    console.log("server is running on port " + process.env.PORT || 1337);
   }),
 });
 

@@ -3,7 +3,13 @@ import { useEffect } from "react";
 
 import "./App.css";
 
-const socket = new WebSocket("ws://localhost:1337");
+console.log(window.location.host);
+
+const socket = new WebSocket({
+  protocol: window.location.protocol === 'https:' ? 'wss' : 'ws',
+  host: window.location.host,
+  path: '/ws'
+});
 
 socket.onopen = function () {
   socket.send("hello from the client");
@@ -16,7 +22,7 @@ export default function App() {
   });
   
   useEffect(() => {
-    socket.onmessage = function (message) {
+    socket.onmessage = function (message) { 
       const data = JSON.parse(message.data);
       setContent(data);
       console.log(data);
