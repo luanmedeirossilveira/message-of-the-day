@@ -1,12 +1,15 @@
 const { default: axios } = require("axios");
 const { translate } = require("@vitalets/google-translate-api");
 const { createClient } = require("pexels");
+const express = require("express");
+const server = require("websocket").server
 
-const server = require("websocket").server,
-  http = require("http");
+const app = express();
 
 const socket = new server({
-  httpServer: http.createServer().listen(1337),
+  httpServer: app.listen(1337, () => {
+    console.log("server is running on port 1337");
+  }),
 });
 
 const apiConselho = "https://api.adviceslip.com/advice";
